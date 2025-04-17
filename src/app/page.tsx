@@ -2,10 +2,13 @@
 import Image from "next/image";
 import { useState } from "react";
 import ProjectComponent from "./components/projectComponent";
+import { useRouter } from "next/navigation";
+
 
 export default function Home() {
   const [button1Shadow, setButton1Shadow] = useState("5px 5px 0px lime"); // the drop shadwo fo the new project button
   const [button2Shadow, setButton2Shadow] = useState("5px 5px 0px lime"); // the drop shadow of the donate button
+  const router = useRouter();
 
   const data = [
     {
@@ -63,6 +66,7 @@ export default function Home() {
           style={{ boxShadow: button1Shadow }}
           onMouseEnter={hoverBtnNewProject}
           onMouseLeave={unHoverBtnNewProject}
+          onClick={() => router.push("/new")}
         >
           New Project
         </button>

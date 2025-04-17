@@ -8,6 +8,8 @@ export default function NewProject() {
     const [Project, SetProject] = useState("2px 2px 0px lime");
     const [Btn, SetBtn] = useState("2px 2px 0px lime");
 
+
+
     return (
 <div className="flex flex-col justify-center items-center min-h-screen pl-16 pr-16 pt-16 pb-0 bg-[#090314]">
     <fieldset className="fieldset w-xs border-0 p-4 rounded-box bg-orange-500" style={{ boxShadow: "5px 5px 0px lime"}}>
