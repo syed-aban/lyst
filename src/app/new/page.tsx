@@ -1,13 +1,18 @@
 "use client"
 import Link from "next/link";
 import { use, useState } from "react";
+import {useRouter} from "next/navigation";
 
 export default function NewProject() {
 
     const [NextAction, SetNextAction] = useState("2px 2px 0px lime");
     const [Project, SetProject] = useState("2px 2px 0px lime");
     const [Btn, SetBtn] = useState("2px 2px 0px lime");
+    const router = useRouter();
 
+    function handleSubmit() {
+        router.push("/")
+    }
 
 
     return (
@@ -55,7 +60,7 @@ export default function NewProject() {
         onMouseLeave={() => {
             SetBtn("2px 2px 0px lime");
         }}
-        onClick={() => {}}
+        onClick={() => {handleSubmit()}}
         >SUBMIT</button>
     </fieldset>
 </div>
