@@ -3,14 +3,30 @@ import Project from "@/models/projectModel";
 import { NextResponse } from "next/server";
 
 export async function POST(req){
-    const {title, task} = await req.json();
+    try {
+        const {title, task} = await req.json();
+        
+        await connectDB(); 
+        await Project.create({title, task})
     
-    await connectDB(); 
-    await Project.create({title, task})
+        return NextResponse.json({
+            status: 201,
+            message: "Project created successfully",
+            data: {title, task}
+        })
+    } catch (error) {
+        console.log("Error uploading data",error.message)
+    }
+}
 
-    return NextResponse.json({
-        status: 201,
-        message: "Project created successfully",
-        data: {title, task}
-    })
+export async function GET(req){
+    try {
+        await connectDB();
+        const projects = await Project.find()
+        return NextResponse.json({
+            data: projects
+        })
+    } catch (error) {
+        console.log("Error fetching data", error.message)
+    }
 }
