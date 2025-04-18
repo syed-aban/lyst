@@ -3,12 +3,28 @@ import Image from "next/image";
 import { useState } from "react";
 import ProjectComponent from "./components/projectComponent";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { get } from "http";
 
+async function getData() {
+  const res = await fetch("http://localhost:3000/api/projects", {
+    method: "GET",
+  })
+  if(!res.ok) {
+    throw new Error("Failed to fetch data")
+  }
+  return res.json();
+}
+
+let store = await getData();
+store = store.data;
+console.log(store)
 
 export default function Home() {
   const [button1Shadow, setButton1Shadow] = useState("5px 5px 0px lime"); // the drop shadwo fo the new project button
   const [button2Shadow, setButton2Shadow] = useState("5px 5px 0px lime"); // the drop shadow of the donate button
   const router = useRouter();
+  
 
   const data = [
     {
@@ -88,10 +104,11 @@ export default function Home() {
       {/* <div style={{ height: "1rem" }}></div> */}
       <div className="min-h-screen flex items-center justify-center pt-0 pr-22 pl-22 pb-0 ">
         <div className="grid grid-cols-3 mx-auto w-full gap-20">
-          {data.map((project, index) => (
-            <ProjectComponent 
-              title={project.title}
-              task={project.task} 
+        {store.map((project:any, index:any) => (
+            <ProjectComponent
+              key={project.id} // Unique key for each component
+              title={project.title} // Pass title as a prop
+              task={project.task} // Pass task as a prop
             />
           ))}
         </div>
