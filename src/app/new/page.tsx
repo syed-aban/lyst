@@ -9,8 +9,12 @@ export default function NewProject() {
     const [Project, SetProject] = useState("2px 2px 0px lime");
     const [Btn, SetBtn] = useState("2px 2px 0px lime");
     const router = useRouter();
+    const [Title, SetTitle] = useState("");
+    const [Task, SetTask] = useState("");
 
     function handleSubmit() {
+        console.log("Title: ", Title);
+        console.log("Task: ", Task);
         router.push("/")
     }
 
@@ -32,6 +36,7 @@ export default function NewProject() {
             onMouseLeave={() => {
                 SetProject("2px 2px 0px lime");
             }}
+            onChange={(e) =>  SetTitle(e.target.value)}
         />
 
         <div className="h-5"></div>
@@ -48,6 +53,7 @@ export default function NewProject() {
             onMouseLeave={() => {
                 SetNextAction("2px 2px 0px lime");
             }}
+            onChange={(e) =>  SetTask(e.target.value)}
         />
 
         <div className="h-5"></div>
