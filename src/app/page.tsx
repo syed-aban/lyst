@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { get } from "http";
 
+
+
 async function getData() {
   const res = await fetch("http://localhost:3000/api/projects", {
     method: "GET",
@@ -21,38 +23,9 @@ store = store.data;
 console.log(store)
 
 export default function Home() {
+  const router = useRouter();
   const [button1Shadow, setButton1Shadow] = useState("5px 5px 0px lime"); // the drop shadwo fo the new project button
   const [button2Shadow, setButton2Shadow] = useState("5px 5px 0px lime"); // the drop shadow of the donate button
-  const router = useRouter();
-  
-
-  const data = [
-    {
-      title: "Learn Web Dev",
-      task: "Buy the course",
-    },
-    {
-      title: "Build App",
-      task: "Design Landing page",
-    },
-    {
-      title: "Buy Groceries",
-      task: "Make List",
-    },
-    {
-      title: "Learn 3D Modelling",
-      task: "Build Donut",
-    },
-    {
-      title: "Submit the Piles Files",
-      task: "Examine your Piles",
-    },
-    {
-      title: "Make Beats",
-      task: "Learn FL Studio",
-    },
-    
-  ]
 
   // changes the drop shadow of the donate button to 10px
   function hoverBtnNewProject() {

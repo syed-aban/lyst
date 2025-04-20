@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import { use, useState } from "react";
-import {useRouter} from "next/navigation";
+import {useRouter} from "next/navigation"
 
 export default function NewProject() {
 
@@ -12,9 +12,28 @@ export default function NewProject() {
     const [Title, SetTitle] = useState("");
     const [Task, SetTask] = useState("");
 
-    function handleSubmit() {
+    async function handleSubmit() {
+        //get title and task data and print them
         console.log("Title: ", Title);
         console.log("Task: ", Task);
+
+        //make an api call (post req)
+        const res = await fetch("http://localhost:3000/api/projects", {
+            method: "POST",
+            body: JSON.stringify({
+                title: Title,
+                task: Task,
+            })
+        })
+
+        //handle error
+        if (!res.ok) {
+            throw new Error("Failed to create project");
+        }
+
+        console.log(res);
+
+        //push to home route
         router.push("/")
     }
 
