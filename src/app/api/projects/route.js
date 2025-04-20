@@ -30,3 +30,20 @@ export async function GET(req){
         console.log("Error fetching data", error.message)
     }
 }
+
+export async function DELETE(req){
+    try {
+        const {title, task} = await req.json();
+
+        await connectDB();
+        await Project.deleteOne({title, task})
+        return NextResponse.json({
+            status: 200,
+            message: "Project deleted successfully",
+            data: {title, task}
+        })
+
+    } catch (error) {
+        console.log("Error deleting data", error.message)
+    }
+}
